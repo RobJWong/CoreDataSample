@@ -20,7 +20,7 @@ extension ToDoListItem {
     @nonobjc public class func filterRequest(context: NSManagedObjectContext, queryString: String) -> [ToDoListItem]? {
         
         let fetchRequest = ToDoListItem.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name LIKE %@", "wave")
+        fetchRequest.predicate = NSPredicate(format: "name LIKE %@", "\(queryString)")
         do {
             let results = try context.fetch(fetchRequest)
             return results

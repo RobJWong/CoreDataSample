@@ -98,7 +98,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func filterItems() {
         do {
-            models = try ToDoListItem.filterRequest(context: context, queryString: "wave")!
+            models = try ToDoListItem.filterRequest(context: context, queryString: "tuo")!
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
