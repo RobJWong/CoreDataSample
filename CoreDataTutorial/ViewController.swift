@@ -97,15 +97,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func filterItems() {
-        let fetchRequest = ToDoListItem.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name LIKE %@", "wave")
         do {
-            models = try context.fetch(fetchRequest)
+            models = try ToDoListItem.filterRequest(context: context, queryString: "wave")!
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         } catch {
-            //Error with fetching request
+            //error
         }
     }
     

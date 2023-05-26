@@ -17,20 +17,15 @@ extension ToDoListItem {
         return NSFetchRequest<ToDoListItem>(entityName: "ToDoListItem")
     }
     
-//    @nonobjc public class func filterRequest(entity: NSFetchRequest<ToDoListItem>, queryString: String) ->
     @nonobjc public class func filterRequest(context: NSManagedObjectContext, queryString: String) -> [ToDoListItem]? {
+        
+        let fetchRequest = ToDoListItem.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name LIKE %@", "wave")
         do {
-            let database = try context.fetch(ToDoListItem.fetchRequest())
+            let results = try context.fetch(fetchRequest)
+            return results
         } catch {
-            //error handling for if databse doesn't exist
-        }
-        fetchRequest().predicate = NSPredicate(format: "name LIKE %@", "\(queryString)")
-        print("dasda")
-        do {
-            let objects = try context.fetch(fetchRequest())
-            return objects
-        } catch {
-            //error for if filter doesn't work
+            //Error with fetching request
         }
         return nil
     }
